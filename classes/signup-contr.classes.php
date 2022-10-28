@@ -3,13 +3,19 @@ class SignupContr extends Signup {
     private $pwd;
     private $pwdRepeat;
     private $email;
+    private $voornaam;
+    private $tussenvoegsel;
+    private $achternaam;
     public $result;
 
-    public function __construct ($email, $pwd, $pwdRepeat ) {
+    public function __construct ($email, $pwd, $pwdRepeat, $voornaam, $tussenvoegsel, $achternaam ) {
         $this->email = $email;
         $this->pwd = $pwd;
         $this->pwdRepeat = $pwdRepeat;
-        $this->email = $email;
+        $this->voornaam = $voornaam;
+        $this->tussenvoegsel = $tussenvoegsel;
+        $this->achternaam = $achternaam;
+
     }
     public function SignUser() {
         if ($this->emptyInput() == false){
@@ -32,12 +38,12 @@ class SignupContr extends Signup {
             header("location: ../index.php?error-userortakenemail");
             exit();
         }
-        $this->setUser($this->email, $this->pwd, $this->email);
+        $this->setUser($this->email, $this->pwd, $this->voornaam, $this->tussenvoegsel, $this->achternaam);
     }
 
     private function emptyInput() {
         
-        if(empty($this->email) || empty($this->pwd) || empty($this->pwdRepeat) || empty($this->email)) {
+        if(empty($this->email) || empty($this->pwd) || empty($this->pwdRepeat) || empty($this->voornaam || empty($this->tussenvoegsel || empty($this->achternaam )))) {
         $result = false;
         }
         else{
@@ -95,7 +101,18 @@ class SignupContr extends Signup {
         }
         return $result;
     }
+    private function Voornaamcheck() {
 
+        if ($this->voornaam )
+        {
+            $result = false;
+        }
+        else
+        {
+            $result = true;
+        }
+        return $result;
+    }
 }
 
 ?>

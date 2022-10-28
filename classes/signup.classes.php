@@ -2,10 +2,10 @@
         class Signup extends Dbh {
             public $resultCheck;
 
-            protected function setUser($emaill, $pwd) {
-                $stmt = $this->connect()->prepare( ' INSERT INTO user (email, wachtwoord) VALUES (?, ?);');
+            protected function setUser($emaill, $pwd, $voornaam, $tussenvoegsel, $achternaam) {
+                $stmt = $this->connect()->prepare( ' INSERT INTO user (email, wachtwoord, voornaam, tussenvoegsel, achternaam) VALUES (?, ?, ?, ?, ?);');
                 $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                if (!$stmt->execute(array($emaill, $hashedPwd))){
+                if (!$stmt->execute(array($emaill, $hashedPwd, $voornaam, $tussenvoegsel, $achternaam))){
                     $stmt = null;
                     header("location: ../index.php?error=stmtfailed");
                     exit();
